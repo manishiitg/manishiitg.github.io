@@ -1,1 +1,1 @@
-getting started with a ###blog###
+blog website
