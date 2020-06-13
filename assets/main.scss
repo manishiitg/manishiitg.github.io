@@ -4,6 +4,11 @@
 
 @import "{{ site.theme }}";
 
+
+.wrapper {
+        max-width: 100% !important;
+}
+
 .post img {
         display: block;
         border:1px solid #021a40;
