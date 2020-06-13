@@ -187,6 +187,23 @@ outputs = model(**inputs)
 
 ```
 
+also the model "BertForSequenceClassification" takes input as 
+
+```python
+
+def forward(
+        self,
+        input_ids=None,
+        attention_mask=None,
+        token_type_ids=None,
+        position_ids=None,
+        head_mask=None,
+        inputs_embeds=None,
+        labels=None,
+        output_attentions=None,
+    ):
+
+```
 
 
 This is the flow of data upto the training step
