@@ -1,4 +1,4 @@
-# Notes in understanding on huggingface features/examples with Trainer
+# Notes Text Classification understanding on huggingface features/examples with Trainer
 
 
 I am just taking some notes here as i understand in-depth 
@@ -7,7 +7,7 @@ How the tensors are actually passed onto the Transformer models like BERT
 
 ## Text Classification
 
-Full Colab https://colab.research.google.com/drive/1IC5Be6Y_ZAh_z51n8RESUuKfCO4Hg8iv?usp=sharing
+Full Colab [https://colab.research.google.com/drive/1IC5Be6Y_ZAh_z51n8RESUuKfCO4Hg8iv?usp=sharing](https://colab.research.google.com/drive/1IC5Be6Y_ZAh_z51n8RESUuKfCO4Hg8iv?usp=sharing)
 
 
 #### Step 1
@@ -98,7 +98,7 @@ class InputExample:
 
 Next we need to convert the examples into features.
 
-This is done using the inbuilt function "glue_convert_examples_to_features" https://github.com/huggingface/transformers/blob/6449c494d0f40f0b70442f3da9e61f042ff807a8/src/transformers/data/processors/glue.py#L107
+This is done using the inbuilt function "glue_convert_examples_to_features" [https://github.com/huggingface/transformers/blob/6449c494d0f40f0b70442f3da9e61f042ff807a8/src/transformers/data/processors/glue.py#L107](https://github.com/huggingface/transformers/blob/6449c494d0f40f0b70442f3da9e61f042ff807a8/src/transformers/data/processors/glue.py#L107)
 
 
 The input parameter to this are
@@ -114,12 +114,13 @@ examples: List[InputExample],
 
 ```
 
-here tokenizer will be the model dependent tokenizer having the base class https://github.com/huggingface/transformers/blob/9f5d5a531d769d07403f59661884e254f8420afe/src/transformers/tokenization_utils.py#L2224
+here tokenizer will be the model dependent tokenizer having the base class [https://github.com/huggingface/transformers/blob/9f5d5a531d769d07403f59661884e254f8420afe/src/transformers/tokenization_utils.py#L2224](https://github.com/huggingface/transformers/blob/9f5d5a531d769d07403f59661884e254f8420afe/src/transformers/tokenization_utils.py#L2224
+)
 
 
 This function is important as it tokenizes your data and returns a list of 'InputFeatures'
 
-https://github.com/huggingface/transformers/blob/6449c494d0f40f0b70442f3da9e61f042ff807a8/src/transformers/data/processors/utils.py#L56
+[https://github.com/huggingface/transformers/blob/6449c494d0f40f0b70442f3da9e61f042ff807a8/src/transformers/data/processors/utils.py#L56](https://github.com/huggingface/transformers/blob/6449c494d0f40f0b70442f3da9e61f042ff807a8/src/transformers/data/processors/utils.py#L56)
 
 At this stage, we only have integers, we don't have tensors yet.
 
@@ -151,7 +152,7 @@ At this stage, we only have integers, we don't have tensors yet.
 Next these features are directly fed into Trainer.
 Also with model and tokenizer. 
 
-https://github.com/huggingface/transformers/blob/d541938c48f759522f81fa177aae49098e0e0149/src/transformers/trainer.py#L153
+[https://github.com/huggingface/transformers/blob/d541938c48f759522f81fa177aae49098e0e0149/src/transformers/trainer.py#L153](https://github.com/huggingface/transformers/blob/d541938c48f759522f81fa177aae49098e0e0149/src/transformers/trainer.py#L153)
 
 
 Trainer has been recently released. This classes takes our dataset (i.e list of features), model, tokenizer and does the training. 
@@ -161,7 +162,7 @@ It handles all the stuff for gpu, tpu, saving checkpoints etc etc for you.
 Next the main thing i am look at is how the "features" i.e list of integers is converted to "tensors" and passed to a model.
 
 This is where the "DataCollator" class comes into picture.
-https://github.com/huggingface/transformers/blob/d541938c48f759522f81fa177aae49098e0e0149/src/transformers/data/data_collator.py#L32
+[https://github.com/huggingface/transformers/blob/d541938c48f759522f81fa177aae49098e0e0149/src/transformers/data/data_collator.py#L32](https://github.com/huggingface/transformers/blob/d541938c48f759522f81fa177aae49098e0e0149/src/transformers/data/data_collator.py#L32)
 
 We can also define our custom collator if need. 
 
